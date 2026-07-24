@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Project 2 — Movie Recommendation</title>
+<style>
+  body{font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#1a1a1a;
+       max-width:820px;margin:24px auto;padding:0 20px;line-height:1.5;font-size:15px}
+  h1{font-size:22px;margin:0 0 2px;color:#7b1113}
+  h2{font-size:15px;margin:18px 0 6px;color:#7b1113;border-bottom:1px solid #e3d3d3;padding-bottom:3px}
+  p{margin:6px 0}
+  ul{margin:6px 0 6px 0;padding-left:20px}
+  li{margin:3px 0}
+  code{background:#f4f0f0;padding:1px 5px;border-radius:4px;font-size:13px}
+  pre{background:#f4f0f0;padding:10px 12px;border-radius:6px;font-size:13px;overflow:auto;margin:6px 0}
+  .sub{color:#555;font-size:13px;margin:0 0 10px}
+  .pill{display:inline-block;background:#7b1113;color:#fff;font-size:12px;border-radius:10px;padding:1px 9px;margin-right:4px}
+  table{border-collapse:collapse;margin:6px 0;font-size:14px}
+  td{padding:2px 14px 2px 0}
+  .note{background:#fbf6ee;border-left:3px solid #d9a441;padding:8px 12px;border-radius:4px;margin:8px 0;font-size:14px}
+</style>
+</head>
+<body>
+
+<h1>Project 2 — Movie Recommendation with Your Transformer</h1>
+<p class="sub">Reuse the transformer you built in Project 1. &nbsp;•&nbsp; Works on CPU. &nbsp;•&nbsp; Estimated time: <b>10–12 hours</b>.</p>
+
+<p>Treat each movie as a "token" and a user's watch history as a "sentence": next-token prediction
+becomes <b>next-movie prediction</b>. You train your Project-1 transformer on MovieLens, pull out
+the learned item embeddings, build a tool that returns movies similar to a seed movie, study that
+space with unsupervised methods, and compare against classic baselines.</p>
+
+<h2>What you'll build (in <code>tinytransformer/rec/</code>)</h2>
+<ul>
+  <li><b>A · Data → tensors</b> — turn histories into right-padded next-item training pairs; sample batches.</li>
+  <li><b>B · Training</b> — the next-item training loop (padded targets ignored in the loss).</li>
+  <li><b>C · Embeddings</b> — extract the learned item vectors (you'll compare the input vs. output embedding).</li>
+  <li><b>D · Similarity tool</b> — top-k cosine neighbours of a seed movie.</li>
+  <li><b>E · Unsupervised structure</b> — k-means over the embeddings + a genre-purity score.</li>
+  <li><b>F · Baselines &amp; evaluation</b> — most-popular and item-item kNN, compared on hit@10 / nDCG@10 / MRR.</li>
+</ul>
+<p>The data download, ranking metrics, and t-SNE plotting are <b>provided</b>. Look for
+<code>### BEGIN CODE EDIT ###</code> markers.</p>
+
+<h2>Setup</h2>
+<pre>cd project2
+python3 -m pip install -r requirements.txt
+python3 -m pip install -e .
+python3 -m pytest tests          # most fail until you implement the blanks</pre>
+<p style="font-size:13px;color:#555">On macOS use <code>python3 -m pip</code> / <code>python3 -m pytest</code> (bare <code>pip</code>/<code>pytest</code> are often not on your PATH).</p>
+
+<h2>What to submit</h2>
+<ul>
+  <li>Your completed <code>tinytransformer/rec/</code> code (passing the tests).</li>
+  <li>The driver notebook <code>notebooks/project2_movielens.ipynb</code>, run end-to-end, with the two
+      <b>analysis questions</b> answered: (1) why the output embedding recovers genre and the input one doesn't;
+      (2) why the transformer beats the baselines, and when the simple baseline is hard to beat.</li>
+</ul>
+
+<h2>Grading (100 pts)</h2>
+<p><span class="pill">70</span>autograded tests &nbsp;
+   <span class="pill">10</span>sensible end-to-end run &nbsp;
+   <span class="pill">20</span>written analysis</p>
+
+<div class="note">
+<b>Two tips that save hours.</b> You may plug in your own Project-1 transformer, but a working
+<b>reference</b> version ships in <code>tinytransformer/</code> — if yours has bugs, keep the reference
+files; you lose no Project-2 credit for a Project-1 bug. And if the MovieLens download is blocked on
+your machine, <code>data.make_synthetic_movielens()</code> is a drop-in replacement so you can keep working.
+</div>
+
+</body>
+</html>

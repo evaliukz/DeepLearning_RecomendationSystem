@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tinytransformer"
+version = "0.2.0"
+description = "Project 2 -- sequential recommendation on MovieLens with your Project-1 transformer"
+requires-python = ">=3.9"
+dependencies = [
+    "torch>=2.0",
+    "numpy>=1.23",
+    "scikit-learn>=1.1",
+    "matplotlib>=3.5",
+]
+
+[tool.setuptools.packages.find]
+include = ["tinytransformer*"]
